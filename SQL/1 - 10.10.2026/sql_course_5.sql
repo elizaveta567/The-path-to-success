@@ -93,3 +93,58 @@ select *
 from a
 where avg_p > (select avg(priority_level)
 from orders)
+
+
+#Задание 5
+with t as (select e.name, count(os.order_id) as cnt
+from employees e inner join order_staff os on e.employee_id = os.employee_id
+group by e.name
+order by cnt desc,e.name)
+select *
+from t
+limit 5
+
+
+#Задание 6
+with t as (select store_id, name
+from stores
+where load_level >= 8)
+select o.order_id, t.name
+from t inner join orders o on o.store_id = t.store_id
+
+
+#Задание 7
+with t as (select max(priority_level) as mx_pr
+from orders)
+select o.order_id
+from orders o inner join t on o.priority_level = t.mx_pr
+
+
+#Задание 8
+select batch_id,batch_name
+from delivery_batches
+where bonus_rub>=200
+
+
+#Задание 9
+select (select count(completed)
+from delivery_batches
+where completed = 1
+)*1.0 / (select count(*)
+from delivery_batches
+where completed is not NULL
+)
+
+
+'''Даа, но в решение вариант гораздо лучше'''
+select round(avg(completed),4)
+from delivery_batches
+where completed is not NULL
+
+
+#Задание 10
+select s.store_id,s.name,avg(o.delivered_day - o.created_day +1)
+from orders o inner join stores s on o.store_id = s.store_id
+where o.delivered_day is not NULL
+group by s.store_id
+having avg(o.delivered_day - o.created_day +1) > (select avg(o.delivered_day - o.created_day +1) from orders o where o.delivered_day is not NULL)
