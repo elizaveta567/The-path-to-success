@@ -31,7 +31,18 @@ round(avg(completed),4) --> round(sum(coalesce(bonus_rub,0)) / NULLIF(count(*),0
 
 
 #Задание 4
-'''Я не понимаю задачу.....'''
+'''Одна из самых тяжелых для меня задач, не могла понять условие'''
+with t as (select db.batch_id, 1.0*db.bonus_rub/avg(o.priority_level) as bonus_per_priority
+from delivery_batches db join
+batch_orders bo on db.batch_id = bo.batch_id
+join orders o on o.order_id = bo.order_id
+where db.bonus_rub is not NULL
+group by db.batch_id,db.bonus_rub
+)
+select *
+from t
+where bonus_per_priority > (select avg(bonus_per_priority) from t)
+order by batch_id 
 
 
 #Задание 5
@@ -93,7 +104,7 @@ on os.order_id = o.order_id
 group by o.order_id)
 select order_id, flag
 from t
-where flag=0
+where flag=0 
 
 
 
