@@ -14,7 +14,7 @@ select store_type
 from stores 
 
 
-#Задание 3
+#Задание 3 dq
 select 'employees: '||employee_id as entity_id
 from employees
 union all
