@@ -180,7 +180,7 @@ client_id	order_id	order_dt
 
 
 select o1.client_id, o1.order_id, o1.order_dt, 
-(case when o1.order_dt=(select min(o2.order_dt) from orders as o2 where o1.client_id=o2.client_id group by o2.client_id) then 1 else 0 end) as flag
+(case when o1.order_dt =(select min(o2.order_dt) from orders as o2 where o1.client_id=o2.client_id) then 1 else 0 end) as flag
 from orders o1
 
 
