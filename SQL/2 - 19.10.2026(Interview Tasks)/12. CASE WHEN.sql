@@ -99,7 +99,7 @@ client_id	activation_date
 
 select client_id, activation_date,
 case when date '2026-04-30' - activation_date>=100 then 'a long time ago'
-when '2026-04-30' - activation_date>=30 then 'not so long ago'
+when date '2026-04-30' - activation_date>=30 then 'not so long ago'
 else 'recently'
 from clients
 
