@@ -4,7 +4,7 @@
 
 with df_init as (
     select e.first_name, e.last_name, d.department_name, e.hire_date,
-    row_number()over(partition by p.department_id order by e.hire_date desc) as rnk
+    row_number()over(partition by d.department_id order by e.hire_date desc) as rnk
     from employees e join departments d on e.department_id=d.department_id)
 select first_name, last_name, department_name, hire_date
 from df_init
