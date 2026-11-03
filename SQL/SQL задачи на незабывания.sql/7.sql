@@ -1,7 +1,7 @@
 Покажите сотрудников, чья зарплата входит в топ-10% по их отделу, с указанием ранга.
 
 with df as (
-    select department_id, count(*)*0.1 as top_10
+    select department_id, ceil(count(*)*0.1) as top_10
     from employees
     group by department_id
 ),
