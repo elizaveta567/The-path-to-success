@@ -35,12 +35,12 @@ values_tuple = (1, 2, 3)
 # Напишите решение ниже.
 values_list = [1, 2, 3]
 values_list[0]=99
-print(values_list) -> [99,2,3]
+print(values_list) #-> [99,2,3]
 
 
 values_tuple = (1, 2, 3)
 values_list[0]=99
-print(values_list) -> TypeError: 'tuple' object does not support item assignment
+print(values_list)# -> TypeError: 'tuple' object does not support item assignment
 
 
 #Список изменить получилось, так как это структура,
