@@ -12,4 +12,4 @@ df_avg_per_customer as (
 )
 select c.customer_name, c.avg_customer, c.cnt
 from df_total_avg a cross join df_avg_per_customer c 
-where c.avg_customer>a.total_avg
+where c.avg_customer>a.total_avg '''или avg_customer>(select total_avg from df_total_avg)'''
